@@ -23,17 +23,36 @@ RUN git clone https://github.com/qemu/qemu.git -b v5.1.0 --recurse-submodules
 RUN mkdir build && \
   cd build && \
   /qemu/configure \
-  --cross-prefix=aarch64-linux-gnu- --target-list=x86_64-softmmu --static \
+  --cross-prefix=aarch64-linux-gnu- \
+  --target-list=x86_64-softmmu \
+  --static \
   --audio-drv-list="" \
-  --enable-virtfs --enable-vhost-vsock  \
-  # --disable-tcg --disable-tcg-interpreter \
-  --disable-slirp --disable-containers --disable-gtk \
-  --disable-capstone --disable-avx2 --disable-avx512f --disable-replication \
-  --disable-parallels --disable-sheepdog --disable-vvfat --disable-qed --disable-vdi \
-  --disable-qcow1 --disable-dmg --disable-cloop --disable-bochs --disable-bzip2 \
-  --disable-guest-agent --disable-numa  --disable-vnc \
+  --enable-virtfs \
+  --enable-vhost-vsock \
+  --disable-slirp \
+  --disable-tcg \
+  --disable-tcg-interpreter  \
+  --disable-containers --disable-gtk \
+  --disable-capstone \
+  --disable-avx2 \
+  --disable-avx512f \
+  --disable-replication \
+  --disable-parallels \
+  --disable-sheepdog \
+  --disable-vvfat \
+  --disable-qed \
+  --disable-vdi \
+  --disable-qcow1 \
+  --disable-dmg \
+  --disable-cloop \
+  --disable-bochs \
+  --disable-bzip2 \
+  --disable-guest-agent \
+  --disable-numa \
+  --disable-vnc \
   --disable-live-block-migration \
   --without-default-devices
+
 RUN echo CONFIG_PARALLEL=y >> build/config-host.mak
 RUN echo CONFIG_VIRTIO=y >> build/config-host.mak
 RUN echo CONFIG_VIRTIO_SERIAL=y >> build/config-host.mak
@@ -44,6 +63,7 @@ RUN echo CONFIG_VIRTIO_SCSI=y >> build/config-host.mak
 RUN echo CONFIG_VIRTIO_BLK=y >> build/config-host.mak
 RUN echo CONFIG_VIRTIO_9P=y >> build/config-host.mak
 RUN echo CONFIG_FSDEV_9P=y >> build/config-host.mak
+
 
 RUN cd build && make x86_64-softmmu/all V=1 CFLAGS+="-Os -flto" -j4 LIBS+="-flto -lblkid -luuid -lpixman-1 -lutil"
 #RUN cd build && make x86_64-softmmu/all V=1 LIBS+="-flto -lblkid -luuid -lpixman-1 -lutil" CONFIG_PARALLEL=y CONFIG_VIRTIO_SERIAL=y
