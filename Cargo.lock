@@ -2784,3 +2784,25 @@ dependencies = [
  "uuid",
  "ya-runtime-api",
 ]
+
+[[package]]
+name = "ya-runtime-vm-aarch64-host"
+version = "0.0.0"
+dependencies = [
+ "anyhow",
+ "bollard-stubs",
+ "crc",
+ "env_logger",
+ "futures",
+ "log",
+ "raw-cpuid",
+ "serde",
+ "serde_json",
+ "strip-ansi-escapes",
+ "structopt",
+ "tempdir",
+ "tokio",
+ "tokio-byteorder",
+ "uuid",
+ "ya-runtime-api",
+]
