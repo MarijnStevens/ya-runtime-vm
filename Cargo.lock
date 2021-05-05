@@ -1675,17 +1675,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "raw-cpuid"
-version = "8.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1fdf7d9dbd43f3d81d94a49c1c3df73cc2b3827995147e6cf7f89d4ec5483e73"
-dependencies = [
- "bitflags",
- "cc",
- "rustc_version",
-]
-
-[[package]]
 name = "rdrand"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2764,6 +2753,7 @@ dependencies = [
 ]
 
 [[package]]
+<<<<<<< HEAD
 name = "ya-runtime-vm"
 version = "0.2.6"
 dependencies = [
@@ -2786,6 +2776,8 @@ dependencies = [
 ]
 
 [[package]]
+=======
+>>>>>>> 83c77ea (Added changes.)
 name = "ya-runtime-vm-aarch64-host"
 version = "0.0.0"
 dependencies = [
@@ -2795,7 +2787,6 @@ dependencies = [
  "env_logger",
  "futures",
  "log",
- "raw-cpuid",
  "serde",
  "serde_json",
  "strip-ansi-escapes",
