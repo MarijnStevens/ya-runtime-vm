@@ -22,8 +22,8 @@ use ya_runtime_vm_aarch64_host::{
     guest_agent_comm::{GuestAgent, Notification, RedirectFdType, RemoteCommandResult},
 };
 
-const DIR_RUNTIME: &'static str = "runtime";
-const FILE_RUNTIME: &'static str = "vmrt-aarch";
+const DIR_RUNTIME: &'static str = "runtime-aarch64";
+const FILE_RUNTIME: &'static str = "vmrt-aarch64";
 const FILE_VMLINUZ: &'static str = "vmlinuz-virt";
 const FILE_INITRAMFS: &'static str = "initramfs.cpio.gz";
 const FILE_TEST_IMAGE: &'static str = "self-test.gvmi";
@@ -261,7 +261,7 @@ impl Runtime {
             FILE_INITRAMFS,
             "-net",
             "none",
-            "-enable-kvm",
+            //"-enable-kvm",
             "-cpu",
             "host",
             "-smp",
@@ -448,7 +448,15 @@ fn offer_template() -> anyhow::Result<serde_json::Value> {
 }
 
 async fn self_test() -> anyhow::Result<()> {
+    
     server::run_async(|e| async {
+        
+        let p = vec![DIR_RUNTIME, "/", FILE_TEST_IMAGE];
+        
+        let TEST_IMAGE = p.concat();
+                
+        println!("{}",TEST_IMAGE);        
+
         let deployment = Deployment {
             cpu_cores: 1,
             mem_mib: 128,
@@ -478,7 +486,7 @@ async fn self_test() -> anyhow::Result<()> {
     Ok(())
 }
 
-fn runtime_dir() -> io::Result<PathBuf> {
+fn runtime_dir() -> io::Result<PathBuf> {    
     Ok(std::env::current_exe()?
         .parent()
         .ok_or_else(|| io::Error::from(io::ErrorKind::NotFound))?

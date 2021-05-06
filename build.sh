@@ -2,18 +2,18 @@
 
 
 #TARGET="aarch64-unknown-linux-gnu"
-TARGET="armv7-unknown-linux-gnueabihf"
+ARCH="armv7"
+TARGET="$ARCH-unknown-linux-gnueabihf"
 
-
-PROJECT_NAME="ya-runtime-vm-aarch64-host"
-
-TARGETFILE="./target/$TARGET/release/$PROJECT_NAME"
+TARGET_DIR="./target/$TARGET/release/"
 
 echo -e "# build binary"
 PKG_CONFIG_ALLOW_CROSS=1 OPENSSL_STATIC=true \
 cargo build --release --target $TARGET && \
 
-echo -e $(readelf --arch-specific $TARGETFILE) && \
+echo -e $(readelf --arch-specific "$TARGET_DIR/ya-runtime-vm-aarch64-host") && \
 
+\cp "$TARGET_DIR/ya-runtime-vm-aarch64-host"  ../yagna-binaries/$ARCH/ya-runtime-vm-$ARCH-host
+\cp "$TARGET_DIR/libya_runtime_vm_aarch64_host.rlib" ../yagna-binaries/$ARCH/
+\cp "$TARGET_DIR/gvmkit" ../yagna-binaries/$ARCH/
 
-\cp -r $TARGETFILE  ../yagna-binaries/armv7/
