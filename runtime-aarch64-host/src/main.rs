@@ -22,8 +22,8 @@ use ya_runtime_vm_aarch64_host::{
     guest_agent_comm::{GuestAgent, Notification, RedirectFdType, RemoteCommandResult},
 };
 
-const DIR_RUNTIME: &'static str = "runtime-aarch64";
-const FILE_RUNTIME: &'static str = "vmrt-aarch64";
+const DIR_RUNTIME: &'static str = "runtime";
+const FILE_RUNTIME: &'static str = "vmrt-armv7";
 const FILE_VMLINUZ: &'static str = "vmlinuz-virt";
 const FILE_INITRAMFS: &'static str = "initramfs.cpio.gz";
 const FILE_TEST_IMAGE: &'static str = "self-test.gvmi";
@@ -263,15 +263,13 @@ impl Runtime {
             "none",
             //"-enable-kvm",
             "-cpu",
-            "host",
+            "max",
             "-smp",
             deployment.cpu_cores.to_string().as_str(),
             "-append",
             "console=ttyS0 panic=1",
-            "-device",
-            "virtio-serial",
-            "-device",
-            "virtio-rng-pci",
+            "-device", "virtio-serial",
+            "-device", "virtio-rng-pci",
             "-chardev",
             format!(
                 "socket,path={},server,nowait,id=manager_cdev",
@@ -449,14 +447,8 @@ fn offer_template() -> anyhow::Result<serde_json::Value> {
 
 async fn self_test() -> anyhow::Result<()> {
     
-    server::run_async(|e| async {
-        
-        let p = vec![DIR_RUNTIME, "/", FILE_TEST_IMAGE];
-        
-        let TEST_IMAGE = p.concat();
-                
-        println!("{}",TEST_IMAGE);        
-
+    server::run_async(|e| async {                           
+            
         let deployment = Deployment {
             cpu_cores: 1,
             mem_mib: 128,
