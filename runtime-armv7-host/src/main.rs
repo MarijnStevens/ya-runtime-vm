@@ -446,9 +446,9 @@ fn offer_template() -> anyhow::Result<serde_json::Value> {
 }
 
 async fn self_test() -> anyhow::Result<()> {
-    
-    server::run_async(|e| async {                           
-            
+
+    server::run_async(|e| async {
+
         let deployment = Deployment {
             cpu_cores: 1,
             mem_mib: 128,
@@ -478,7 +478,7 @@ async fn self_test() -> anyhow::Result<()> {
     Ok(())
 }
 
-fn runtime_dir() -> io::Result<PathBuf> {    
+fn runtime_dir() -> io::Result<PathBuf> {
     Ok(std::env::current_exe()?
         .parent()
         .ok_or_else(|| io::Error::from(io::ErrorKind::NotFound))?
