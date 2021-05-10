@@ -17,7 +17,7 @@ use ya_runtime_api::{
     deploy::{DeployResult, StartMode},
     server,
 };
-use ya_runtime_vm_aarch64_host::{
+use ya_runtime_vm_armv7_host::{
     deploy::Deployment,
     guest_agent_comm::{GuestAgent, Notification, RedirectFdType, RemoteCommandResult},
 };

@@ -1,5 +1,5 @@
 [package]
-name = "ya-runtime-vm-aarch64-host"
+name = "ya-runtime-vm-armv7-host"
 version = "0.0.0"
 authors = ["Marijn Stevens <marijnstevens@gmail.com>"]
 edition = "2018"
@@ -7,17 +7,17 @@ license = "GPL-3.0"
 
 [package.metadata.deb]
 assets = [
-    ["target/release/ya-runtime-vm-aarch64-host", "usr/lib/yagna/plugins/ya-runtime-vm-aarch64-host/", "755"],
-    ["conf/ya-runtime-vm-aarch64-host.json", "usr/lib/yagna/plugins/", "644"],
-    ["image/self-test.gvmi", "usr/lib/yagna/plugins/ya-runtime-vm-aarch64-host/runtime/", "644"],
+    ["target/release/ya-runtime-vm-armv7-host", "usr/lib/yagna/plugins/ya-runtime-vm-armv7-host/", "755"],
+    ["conf/ya-runtime-vm-armv7-host.json", "usr/lib/yagna/plugins/", "644"],
+    ["image/self-test.gvmi", "usr/lib/yagna/plugins/ya-runtime-vm-armv7-host/runtime/", "644"],
 
-    ["poc/runtime/vmrt-aarch64", "usr/lib/yagna/plugins/ya-runtime-vm-aarch64-host/runtime-aarch64/", "755"],
-    ["poc/runtime/bios-256k.bin", "usr/lib/yagna/plugins/ya-runtime-vm-aarch64-host/runtime/", "644"],
-    ["poc/runtime/kvmvapic.bin", "usr/lib/yagna/plugins/ya-runtime-vm-aarch64-host/runtime/", "644"],
-    ["poc/runtime/linuxboot_dma.bin", "usr/lib/yagna/plugins/ya-runtime-vm-aarch64-host/runtime/", "644"],
+    ["poc/runtime/vmrt-armv7", "usr/lib/yagna/plugins/ya-runtime-vm-armv7-host/runtime/", "755"],
+    ["poc/runtime/bios-256k.bin", "usr/lib/yagna/plugins/ya-runtime-vm-armv7-host/runtime/", "644"],
+    ["poc/runtime/kvmvapic.bin", "usr/lib/yagna/plugins/ya-runtime-vm-armv7-host/runtime/", "644"],
+    ["poc/runtime/linuxboot_dma.bin", "usr/lib/yagna/plugins/ya-runtime-vm-armv7-host/runtime/", "644"],
 
-    ["init-container/initramfs.cpio.gz", "usr/lib/yagna/plugins/ya-runtime-vm-aarch64-host/runtime/", "644"],
-    ["init-container/vmlinuz-virt", "usr/lib/yagna/plugins/ya-runtime-vm-aarch64-host/runtime/", "644"],
+    ["init-container/initramfs.cpio.gz", "usr/lib/yagna/plugins/ya-runtime-vm-armv7-host/runtime/", "644"],
+    ["init-container/vmlinuz-virt", "usr/lib/yagna/plugins/ya-runtime-vm-armv7-host/runtime/", "644"],
 ]
 
 [dependencies]
@@ -44,9 +44,9 @@ tempdir = "0.3.7"
 anyhow = "1.0.33"
 
 [lib]
-name = "ya_runtime_vm_aarch64_host"
+name = "ya_runtime_vm_armv7_host"
 path = "src/lib.rs"
 
 [[bin]]
-name = "ya-runtime-vm-aarch64-host"
+name = "ya-runtime-vm-armv7-host"
 path = "src/main.rs"
