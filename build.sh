@@ -1,11 +1,11 @@
 #!/bin/bash
 
 
-ARCH="aarch64"
-TARGET="$ARCH-unknown-linux-gnu"
+#ARCH="aarch64"
+#TARGET="$ARCH-unknown-linux-gnu"
 
-#ARCH="armv7"
-#TARGET="$ARCH-unknown-linux-gnueabihf"
+ARCH="armv7"
+TARGET="$ARCH-unknown-linux-gnueabihf"
 
 TARGET_DIR="./target/$TARGET/release/"
 
