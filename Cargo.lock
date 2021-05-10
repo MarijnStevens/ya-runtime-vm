@@ -2753,7 +2753,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "ya-runtime-vm-aarch64-host"
+name = "ya-runtime-vm-armv7-host"
 version = "0.0.0"
 dependencies = [
  "anyhow",
