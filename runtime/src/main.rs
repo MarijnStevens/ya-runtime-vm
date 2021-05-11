@@ -449,9 +449,13 @@ fn offer_template() -> anyhow::Result<serde_json::Value> {
 
 async fn self_test() -> anyhow::Result<()> {
     server::run_async(|e| async {
+
+      let donkey =  runtime_dir().to_string();
+      println!(donkey);
+
         let deployment = Deployment {
             cpu_cores: 1,
-            mem_mib: 128,
+            mem_mib: 100,
             task_package: runtime_dir()
                 .expect("runtime directory not found")
                 .join(FILE_TEST_IMAGE)
