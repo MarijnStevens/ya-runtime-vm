@@ -529,6 +529,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b3a71ab494c0b5b860bdc8407ae08978052417070c2ced38573a9157ad75b8ac"
 
 [[package]]
+name = "cpuid"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a0c4b055219ace68cabfbb8071c4aad068565d11b67e092e151b17b9fd3bdba9"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "cpuid-bool"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2753,11 +2762,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "ya-runtime-vm-armv7-host"
+name = "ya-runtime-vm-aarch64-host"
 version = "0.0.0"
 dependencies = [
  "anyhow",
  "bollard-stubs",
+ "cpuid",
  "crc",
  "env_logger",
  "futures",

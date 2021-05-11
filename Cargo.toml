@@ -1,5 +1,5 @@
 [workspace]
 members = [
-    "runtime-armv7-host",
+    "runtime-aarch64-host",
     "gvmkit",
 ]
