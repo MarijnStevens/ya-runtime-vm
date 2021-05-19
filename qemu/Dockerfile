@@ -17,7 +17,7 @@ RUN git clone https://github.com/qemu/qemu.git -b v5.1.0 --recurse-submodules
 # --without-default-devices
 RUN mkdir build && \
   cd build && \
-  /qemu/configure
+  /qemu/configure \
   --target-list=x86_64-softmmu \
   --static \
   --audio-drv-list="" \
