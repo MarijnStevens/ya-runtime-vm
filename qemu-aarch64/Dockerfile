@@ -13,6 +13,7 @@ RUN apt update && \
 RUN apt update && \
     DEBIAN_FRONTEND=noninteractive \
     apt install -y --no-install-recommends \
+        libssl-dev:arm64 \
         libcap-ng-dev:arm64 \
         libpixman-1-dev:arm64 \
         libglib2.0-dev:arm64 \
@@ -28,18 +29,19 @@ RUN wget -q -O "qemu-6.0.0.tar.xz" https://download.qemu.org/qemu-6.0.0.tar.xz &
   tar -xf qemu-6.0.0.tar.xz
 
 # --without-default-devices
- # --static \
+# --disable-tcg \
+# --disable-tcg-interpreter  \
+
 RUN mkdir build && \
   cd build && \
   ../qemu-6.0.0/configure \
+  --static \
   --cross-prefix=aarch64-linux-gnu- \
   --target-list=x86_64-softmmu \
   --audio-drv-list="" \
   --enable-virtfs \
-  --enable-vhost-vsock \
   --disable-slirp \
-  --disable-tcg \
-  --disable-tcg-interpreter  \
+  --enable-vhost-vsock \
   --disable-containers --disable-gtk \
   --disable-capstone \
   --disable-avx2 \
@@ -72,6 +74,8 @@ echo CONFIG_VIRTIO_BLK=y >> config-host.mak && \
 echo CONFIG_VIRTIO_9P=y >> config-host.mak && \
 echo CONFIG_FSDEV_9P=y >> config-host.mak
 
-RUN cd build && make -j$(nproc)
+RUN cd build && make V=1
 RUN cp /build/x86_64-softmmu/qemu-system-x86_64 vmrt-aarch64
+RUN file vmrt-aarch64
+RUN wc -l vmrt-aarch64
 
