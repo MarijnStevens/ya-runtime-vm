@@ -251,7 +251,7 @@ impl Runtime {
         let mut cmd = process::Command::new(runtime_dir.join(FILE_RUNTIME));
         cmd.current_dir(&runtime_dir).args(&[
             "-m",
-            format!("{}M", deployment.mem_mib).as_str(),
+            format!("{}M", deployment.mem_mib).as_str(),        
             "-nographic",
             "-vga",
             "none",
@@ -261,10 +261,9 @@ impl Runtime {
             FILE_INITRAMFS,
             "-net",
             "none",
-            //"-enable-kvm",
             "-cpu",
-            "host",
-            //"-smp",
+            "max",
+            "-smp",
             deployment.cpu_cores.to_string().as_str(),
             "-append",
             "console=ttyS0 panic=1",
@@ -272,7 +271,7 @@ impl Runtime {
             "-device", "virtio-rng-pci",
             "-chardev",
             format!(
-                "socket,path={},server,nowait,id=manager_cdev",
+                "socket,path={},server=on,wait=no,id=manager_cdev",
                 socket_path.display()
             )
             .as_str(),

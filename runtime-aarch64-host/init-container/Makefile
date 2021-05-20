@@ -10,8 +10,8 @@ SRC_DIR ?= src
 TEST_DIR ?= tests
 
 KERNEL_VER ?= 5.10.29-0-virt
-#KERNEL_URL ?= https://ya-runtime.s3-eu-west-1.amazonaws.com/vm/kernel/linux-virt-5.10.29-r0.apk
-KERNEL_SHA256 ?= 9d4630584169f6d14b2bab80e69ac2fbbf7af853ce26a19fdc570dade7e6f8d0
+KERNEL_URL ?= https://ya-runtime.s3-eu-west-1.amazonaws.com/vm/kernel/linux-virt-5.10.29-r0.apk
+KERNEL_SHA256 ?= f3f7ca3421c5232e260b2a8a741bbf72c21881006afcf790aa3bc938e2262719
 
 UNPACKED_DIR := unpacked_kernel
 
@@ -38,10 +38,7 @@ init: $(addprefix $(SRC_DIR)/,init.o communication.o process_bookkeeping.o cycli
 	strip $@
 
 $(UNPACKED_DIR):
-#wget -q -O "unverified" $(KERNEL_URL)
-# TODO: Move to amazone like the other image.
-	"unverified"=linux-virt-5.10.29-r0.apk
-
+	wget -q -O "unverified" $(KERNEL_URL)
 	echo $(KERNEL_SHA256) "unverified" | sha256sum -c || (echo "Kernel apk checksum verification failed!" && exit 1)
 	$(RM) -rf $(UNPACKED_DIR)
 	mkdir $(UNPACKED_DIR)
