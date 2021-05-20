@@ -7,7 +7,6 @@ TARGET="$ARCH-unknown-linux-gnu"
 TARGET_DIR="./target/$TARGET/release"
 
 echo -e "# build binary"
-#PKG_CONFIG_ALLOW_CROSS=1 OPENSSL_STATIC=true \
 cargo build --release --target $TARGET && \
 
 echo -e $(readelf --arch-specific "$TARGET_DIR/ya-runtime-vm-$ARCH-host")

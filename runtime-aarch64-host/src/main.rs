@@ -23,7 +23,7 @@ use ya_runtime_vm_aarch64_host::{
 };
 
 const DIR_RUNTIME: &'static str = "runtime";
-const FILE_RUNTIME: &'static str = "vmrt-aarch64";
+const FILE_RUNTIME: &'static str = "vmrt-x86_64";
 const FILE_VMLINUZ: &'static str = "vmlinuz-virt";
 const FILE_INITRAMFS: &'static str = "initramfs.cpio.gz";
 const FILE_TEST_IMAGE: &'static str = "self-test.gvmi";
