@@ -1,0 +1,12 @@
+make: Nothing to be done for 'all'.
+
+        cargo:rerun-if-changed=/run/media/ms/Data/repositories/git/golem/ya-runtime-vm/runtime-aarch64-host/init-container/Makefile
+        cargo:rerun-if-changed=/run/media/ms/Data/repositories/git/golem/ya-runtime-vm/runtime-aarch64-host/init-container/include/communication.h
+        cargo:rerun-if-changed=/run/media/ms/Data/repositories/git/golem/ya-runtime-vm/runtime-aarch64-host/init-container/include/cyclic_buffer.h
+        cargo:rerun-if-changed=/run/media/ms/Data/repositories/git/golem/ya-runtime-vm/runtime-aarch64-host/init-container/include/process_bookkeeping.h
+        cargo:rerun-if-changed=/run/media/ms/Data/repositories/git/golem/ya-runtime-vm/runtime-aarch64-host/init-container/include/proto.h
+        cargo:rerun-if-changed=/run/media/ms/Data/repositories/git/golem/ya-runtime-vm/runtime-aarch64-host/init-container/src/communication.c
+        cargo:rerun-if-changed=/run/media/ms/Data/repositories/git/golem/ya-runtime-vm/runtime-aarch64-host/init-container/src/cyclic_buffer.c
+        cargo:rerun-if-changed=/run/media/ms/Data/repositories/git/golem/ya-runtime-vm/runtime-aarch64-host/init-container/src/process_bookkeeping.c
+        cargo:rerun-if-changed=/run/media/ms/Data/repositories/git/golem/ya-runtime-vm/runtime-aarch64-host/init-container/src/init.c
+        

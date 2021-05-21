@@ -28,54 +28,9 @@ RUN wget -q -O "qemu-6.0.0.tar.xz" https://download.qemu.org/qemu-6.0.0.tar.xz &
   sha256sum --check --status || (echo "qemu-6.0.0.tar.xz checksum verification failed!" && exit 1) && \
   tar -xf qemu-6.0.0.tar.xz
 
-# --without-default-devices
-# --disable-tcg \
-# --disable-tcg-interpreter  \
+COPY build.sh /build.sh
 
-RUN mkdir build && \
-  cd build && \
-  ../qemu-6.0.0/configure \
-  --static \
-  --cross-prefix=aarch64-linux-gnu- \
-  --target-list=x86_64-softmmu \
-  --audio-drv-list="" \
-  --enable-virtfs \
-  --disable-slirp \
-  --enable-vhost-vsock \
-  --disable-containers --disable-gtk \
-  --disable-capstone \
-  --disable-avx2 \
-  --disable-avx512f \
-  --disable-replication \
-  --disable-parallels \
-  --disable-sheepdog \
-  --disable-vvfat \
-  --disable-qed \
-  --disable-vdi \
-  --disable-qcow1 \
-  --disable-dmg \
-  --disable-cloop \
-  --disable-bochs \
-  --disable-bzip2 \
-  --disable-guest-agent \
-  --disable-numa \
-  --disable-vnc \
-  --disable-live-block-migration \
-  --without-default-devices
+RUN ./build.sh aarch64
 
-RUN echo CONFIG_PARALLEL=y >> config-host.mak && \
-echo CONFIG_VIRTIO=y >> config-host.mak && \
-echo CONFIG_VIRTIO_SERIAL=y >> config-host.mak && \
-echo CONFIG_VIRTIO_PCI=y >> config-host.mak && \
-echo CONFIG_VIRTIO_RNG=y >> config-host.mak && \
-echo CONFIG_VIRTIO_MMIO=y >> config-host.mak && \
-echo CONFIG_VIRTIO_SCSI=y >> config-host.mak && \
-echo CONFIG_VIRTIO_BLK=y >> config-host.mak && \
-echo CONFIG_VIRTIO_9P=y >> config-host.mak && \
-echo CONFIG_FSDEV_9P=y >> config-host.mak
-
-RUN cd build && make V=1
-RUN cp /build/x86_64-softmmu/qemu-system-x86_64 vmrt-aarch64
-RUN file vmrt-aarch64
-RUN wc -l vmrt-aarch64
+RUN cp /build/aarch64-softmmu/qemu-system-aarch64 vmrt-aarch64
 
