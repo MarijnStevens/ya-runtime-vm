@@ -1,1 +1,0 @@
-cargo:rerun-if-env-changed=BUILD_SHOW_GENPATH

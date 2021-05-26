@@ -9,9 +9,9 @@ endif
 SRC_DIR ?= src
 TEST_DIR ?= tests
 
-KERNEL_VER ?= 5.10.29-0-virt
-KERNEL_URL ?= https://ya-runtime.s3-eu-west-1.amazonaws.com/vm/kernel/linux-virt-5.10.29-r0.apk
-KERNEL_SHA256 ?= f3f7ca3421c5232e260b2a8a741bbf72c21881006afcf790aa3bc938e2262719
+KERNEL_VER ?= 5.10.38-0-virt
+KERNEL_URL ?= http://dl-cdn.alpinelinux.org/alpine/v3.13/main/aarch64/linux-virt-5.10.38-r0.apk
+KERNEL_SHA256 ?= 4b6d8cee15429c4b901f32d7de737766c18b8460301bb1872794047096ade85c
 
 UNPACKED_DIR := unpacked_kernel
 
@@ -40,10 +40,11 @@ init: $(addprefix $(SRC_DIR)/,init.o communication.o process_bookkeeping.o cycli
 $(UNPACKED_DIR):
 	wget -q -O "unverified" $(KERNEL_URL)
 	echo $(KERNEL_SHA256) "unverified" | sha256sum -c || (echo "Kernel apk checksum verification failed!" && exit 1)
+	cp linux-virt-5.10.38-r0.apk unverified
 	$(RM) -rf $(UNPACKED_DIR)
 	mkdir $(UNPACKED_DIR)
 	tar --warning=no-unknown-keyword -C $(UNPACKED_DIR) -vxzf unverified >/dev/null
-	$(RM) unverified
+#$(RM) unverified
 
 vmlinuz-virt: $(UNPACKED_DIR)
 	cp $(UNPACKED_DIR)/boot/vmlinuz-virt .
@@ -62,9 +63,11 @@ initramfs.cpio.gz: init $(UNPACKED_DIR)
 	cp $(UNPACKED_DIR)/lib/modules/$(KERNEL_VER)/kernel/fs/squashfs/squashfs.ko initramfs
 	cp $(UNPACKED_DIR)/lib/modules/$(KERNEL_VER)/kernel/fs/overlayfs/overlay.ko initramfs
 	cp $(UNPACKED_DIR)/lib/modules/$(KERNEL_VER)/kernel/fs/fscache/fscache.ko initramfs
-	cp $(UNPACKED_DIR)/lib/modules/$(KERNEL_VER)/kernel/net/9p/9pnet.ko initramfs
-	cp $(UNPACKED_DIR)/lib/modules/$(KERNEL_VER)/kernel/net/9p/9pnet_virtio.ko initramfs
-	cp $(UNPACKED_DIR)/lib/modules/$(KERNEL_VER)/kernel/fs/9p/9p.ko initramfs
+#	cp $(UNPACKED_DIR)/lib/modules/$(KERNEL_VER)/kernel/net/9p/9pnet.ko initramfs
+#	cp $(UNPACKED_DIR)/lib/modules/$(KERNEL_VER)/kernel/net/9p/9pnet_virtio.ko initramfs
+# cp $(UNPACKED_DIR)/lib/modules/$(KERNEL_VER)/kernel/fs/9p/9p.ko
+	cp init initramfs
+
 	cd initramfs && find . | cpio --quiet -o -H newc -R 0:0 | gzip -9 > ../$@
 	$(RM) -rf initramfs
 
