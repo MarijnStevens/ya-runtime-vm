@@ -21,7 +21,7 @@ use ya_runtime_sdk::{
     Context, EmptyResponse, EventEmitter, OutputResponse, ProcessId, ProcessIdResponse,
     RuntimeMode,
 };
-use ya_runtime_vm::{
+use ya_runtime_vm_aarch64_host::{
     cpu::CpuInfo,
     deploy::Deployment,
     guest_agent_comm::{GuestAgent, Notification, RedirectFdType, RemoteCommandResult},
