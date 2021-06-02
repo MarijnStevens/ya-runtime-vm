@@ -10,7 +10,7 @@ use tokio::{
     process::{Child, Command},
     sync,
 };
-use ya_runtime_vm_aarch64_host::guest_agent_comm::{GuestAgent, Notification, RedirectFdType};
+use ya_runtime_vm::guest_agent_comm::{GuestAgent, Notification, RedirectFdType};
 
 struct Notifications {
     process_died: sync::Notify,

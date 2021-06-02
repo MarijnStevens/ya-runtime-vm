@@ -45,9 +45,9 @@ tempdir = "0.3.7"
 anyhow = "1.0.33"
 
 [lib]
-name = "ya_runtime_vm_aarch64_host"
+name = "ya_runtime_vm"
 path = "src/lib.rs"
 
 [[bin]]
-name = "ya-runtime-vm-aarch64-host"
+name = "ya-runtime-vm"
 path = "src/main.rs"
