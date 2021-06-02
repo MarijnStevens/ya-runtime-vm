@@ -10,7 +10,7 @@ use tokio::{
     process::{Child, Command},
     sync,
 };
-use ya_runtime_vm_aarch64_host::guest_agent_comm::{GuestAgent, Notification, RedirectFdType};
+use ya_runtime_vm::guest_agent_comm::{GuestAgent, Notification, RedirectFdType};
 
 struct Notifications {
     process_died: sync::Notify,
@@ -99,7 +99,7 @@ fn spawn_vm<'a, P: AsRef<Path>>(temp_path: P, mount_args: &'a [(&'a str, impl To
     let runtime_dir = project_dir.join("poc").join("runtime");
     let init_dir = project_dir.join("init-container");
 
-    let mut cmd = Command::new("vmrt-aarch64");
+    let mut cmd = Command::new("vmrt");
     cmd.current_dir(runtime_dir).args(&[
         "-m",
         "256m",
@@ -113,11 +113,10 @@ fn spawn_vm<'a, P: AsRef<Path>>(temp_path: P, mount_args: &'a [(&'a str, impl To
         "-no-reboot",
         "-net",
         "none",
-        //"-enable-kvm",
+        "-enable-kvm",
         "-cpu",
-        "qemu64",
-        //"host",
-        //"-smp",
+        "host",
+        "-smp",
         "1",
         "-append",
         "console=ttyS0 panic=1",
