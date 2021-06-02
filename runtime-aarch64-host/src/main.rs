@@ -28,7 +28,7 @@ use ya_runtime_vm_aarch64_host::{
 };
 
 const DIR_RUNTIME: &'static str = "runtime";
-const FILE_RUNTIME: &'static str = "vmrt-x86_64";
+const FILE_RUNTIME: &'static str = "vmrt";
 const FILE_VMLINUZ: &'static str = "vmlinuz-virt";
 const FILE_INITRAMFS: &'static str = "initramfs.cpio.gz";
 const FILE_TEST_IMAGE: &'static str = "self-test.gvmi";
@@ -565,17 +565,20 @@ impl Runtime {
             FILE_INITRAMFS,
             "-net",
             "none",
+            "-enable-kvm",
             "-cpu",
-            "max",
+            "host",
             "-smp",
             deployment.cpu_cores.to_string().as_str(),
             "-append",
             "console=ttyS0 panic=1",
-            "-device", "virtio-serial",
-            "-device", "virtio-rng-pci",
+            "-device",
+            "virtio-serial",
+            "-device",
+            "virtio-rng-pci",
             "-chardev",
             format!(
-                "socket,path={},server=on,wait=no,id=manager_cdev",
+                "socket,path={},server,nowait,id=manager_cdev",
                 socket_path.display()
             )
             .as_str(),
