@@ -40,11 +40,10 @@ init: $(addprefix $(SRC_DIR)/,init.o communication.o process_bookkeeping.o cycli
 $(UNPACKED_DIR):
 	wget -q -O "unverified" $(KERNEL_URL)
 	echo $(KERNEL_SHA256) "unverified" | sha256sum -c || (echo "Kernel apk checksum verification failed!" && exit 1)
-	cp linux-virt-5.10.38-r0.apk unverified
 	$(RM) -rf $(UNPACKED_DIR)
 	mkdir $(UNPACKED_DIR)
 	tar --warning=no-unknown-keyword -C $(UNPACKED_DIR) -vxzf unverified >/dev/null
-#$(RM) unverified
+	$(RM) unverified
 
 vmlinuz-virt: $(UNPACKED_DIR)
 	cp $(UNPACKED_DIR)/boot/vmlinuz-virt .
