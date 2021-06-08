@@ -6,7 +6,7 @@ TARGET_DIR="./target/$TARGET/release"
 echo Build for $ARCH
 cargo build --release --target $TARGET && \
 
-ls ./target/ && \
+ls ./target/aarch64-unknown-linux-gnu/release && \
 
 \cp "$TARGET_DIR/ya-runtime-vm-$ARCH-host"  ../yagna-binaries/plugins/ya-runtime-vm-aarch64-host/ya-runtime-vm-$ARCH-host || exit 1
 
