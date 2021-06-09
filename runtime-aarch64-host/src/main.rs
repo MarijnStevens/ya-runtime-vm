@@ -228,7 +228,7 @@ async fn start(
         "-device", "virtio-rng-pci",
         "-chardev",
         format!(
-            "socket,path={},server=on,wait=no,id=manager_cdev",
+            "socket,path={},server=on,wait=off,id=manager_cdev",
             socket_path.display()
         )
         .as_str(),
